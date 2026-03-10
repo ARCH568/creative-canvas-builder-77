@@ -104,6 +104,11 @@ const Login = () => {
           </div>
         </form>
       </div>
+
+      {/* Footer */}
+      <footer className="absolute bottom-4 left-0 right-0 text-center text-xs text-muted-foreground/70">
+        Developed & Designed by <span className="font-semibold text-muted-foreground">BISAG - N</span>
+      </footer>
     </div>
   );
 };
