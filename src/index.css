@@ -6,52 +6,52 @@
 
 @layer base {
   :root {
-    --background: 216 50% 12%;
-    --foreground: 210 40% 92%;
+    --background: 216 45% 18%;
+    --foreground: 210 40% 94%;
 
-    --card: 216 45% 16%;
-    --card-foreground: 210 40% 92%;
+    --card: 216 40% 22%;
+    --card-foreground: 210 40% 94%;
 
-    --popover: 216 45% 16%;
-    --popover-foreground: 210 40% 92%;
+    --popover: 216 40% 22%;
+    --popover-foreground: 210 40% 94%;
 
-    --primary: 207 65% 55%;
+    --primary: 207 65% 58%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 216 40% 20%;
-    --secondary-foreground: 210 40% 85%;
+    --secondary: 216 35% 28%;
+    --secondary-foreground: 210 40% 90%;
 
-    --muted: 216 35% 22%;
-    --muted-foreground: 215 20% 60%;
+    --muted: 216 30% 30%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 200 70% 50%;
+    --accent: 200 70% 55%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 216 30% 25%;
-    --input: 216 35% 20%;
-    --ring: 207 65% 55%;
+    --border: 216 25% 32%;
+    --input: 216 30% 26%;
+    --ring: 207 65% 58%;
 
     --radius: 0.75rem;
 
-    --navy-deep: 216 55% 8%;
-    --navy-dark: 216 50% 12%;
-    --navy-mid: 216 45% 18%;
-    --navy-light: 216 40% 24%;
-    --steel-blue: 207 50% 40%;
-    --ice-blue: 200 60% 70%;
-    --wave-cyan: 195 80% 60%;
+    --navy-deep: 216 50% 14%;
+    --navy-dark: 216 45% 18%;
+    --navy-mid: 216 40% 24%;
+    --navy-light: 216 35% 32%;
+    --steel-blue: 207 50% 48%;
+    --ice-blue: 200 60% 75%;
+    --wave-cyan: 195 80% 65%;
 
-    --sidebar-background: 216 50% 10%;
-    --sidebar-foreground: 210 40% 85%;
-    --sidebar-primary: 207 65% 55%;
+    --sidebar-background: 216 45% 15%;
+    --sidebar-foreground: 210 40% 88%;
+    --sidebar-primary: 207 65% 58%;
     --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 216 40% 18%;
-    --sidebar-accent-foreground: 210 40% 92%;
-    --sidebar-border: 216 30% 20%;
-    --sidebar-ring: 207 65% 55%;
+    --sidebar-accent: 216 35% 24%;
+    --sidebar-accent-foreground: 210 40% 94%;
+    --sidebar-border: 216 25% 26%;
+    --sidebar-ring: 207 65% 58%;
 
     --font-display: 'Rajdhani', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -124,6 +124,83 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes water-flow {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.5); }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.8); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.5); }
+}
+
+@keyframes wave-drift {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes wave-sway {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-15px) scaleY(1.05); }
+}
+
 .animate-float { animation: float 4s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+
+.water-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.water-bg::before,
+.water-bg::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: 50%;
+  left: 50%;
+  border-radius: 40%;
+  opacity: 0.12;
+}
+
+.water-bg::before {
+  background: radial-gradient(ellipse, hsl(200 60% 75% / 0.3), transparent 70%);
+  animation: water-flow 12s linear infinite;
+}
+
+.water-bg::after {
+  background: radial-gradient(ellipse, hsl(195 80% 65% / 0.2), transparent 70%);
+  animation: water-flow 18s linear infinite reverse;
+}
+
+.water-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 120px;
+  opacity: 0.15;
+  animation: wave-drift 8s linear infinite;
+}
+
+.water-wave-2 {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  opacity: 0.1;
+  animation: wave-drift 12s linear infinite reverse;
+}
+
+.water-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    hsl(200 60% 75% / 0.03) 30%,
+    hsl(195 80% 65% / 0.06) 60%,
+    hsl(207 65% 58% / 0.04) 100%
+  );
+  animation: wave-sway 6s ease-in-out infinite;
+}
