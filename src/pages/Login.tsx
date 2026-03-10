@@ -21,19 +21,9 @@ const Login = () => {
       <img
         src={oceanBg}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover animate-bg-float"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-dark/50 to-navy-deep/70" />
-
-      {/* Animated water effects */}
-      <div className="water-bg" />
-      <div className="water-shimmer" />
-      <svg className="water-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z" fill="hsl(200 60% 75% / 0.4)" />
-      </svg>
-      <svg className="water-wave-2" viewBox="0 0 1200 100" preserveAspectRatio="none">
-        <path d="M0,50 C150,100 350,0 500,50 C650,100 850,0 1000,50 C1150,100 1200,80 1200,50 L1200,100 L0,100 Z" fill="hsl(195 80% 65% / 0.3)" />
-      </svg>
 
       {/* Animated particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
