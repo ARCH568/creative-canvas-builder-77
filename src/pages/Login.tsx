@@ -106,8 +106,9 @@ const Login = () => {
       </div>
 
       {/* Footer */}
-      <footer className="absolute bottom-4 left-0 right-0 text-center text-xs text-muted-foreground/70">
-        Developed & Designed by <span className="font-semibold text-muted-foreground">BISAG - N</span>
+      <footer className="absolute bottom-4 left-0 right-0 text-center text-xs text-muted-foreground/70 space-y-0.5">
+        <p>Developed & Designed by <span className="font-semibold text-muted-foreground">BISAG - N</span></p>
+        <p>Version 1.0.0</p>
       </footer>
     </div>
   );
