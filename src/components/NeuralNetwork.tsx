@@ -27,18 +27,27 @@ const NeuralNetwork = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const nodeCount = 45;
-    const connectionDist = 180;
+    const nodeCount = 60;
+    const connectionDist = 150;
 
-    // Initialize nodes
-    nodesRef.current = Array.from({ length: nodeCount }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: 2 + Math.random() * 2.5,
-      pulsePhase: Math.random() * Math.PI * 2,
-    }));
+    // Initialize nodes evenly spread using grid-based distribution
+    const cols = Math.ceil(Math.sqrt(nodeCount * (canvas.width / canvas.height)));
+    const rows = Math.ceil(nodeCount / cols);
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
+
+    nodesRef.current = Array.from({ length: nodeCount }, (_, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      return {
+        x: cellW * (col + 0.2 + Math.random() * 0.6),
+        y: cellH * (row + 0.2 + Math.random() * 0.6),
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        radius: 1.2 + Math.random() * 1,
+        pulsePhase: Math.random() * Math.PI * 2,
+      };
+    });
 
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,46 +70,34 @@ const NeuralNetwork = () => {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectionDist) {
-            const alpha = (1 - dist / connectionDist) * 0.35;
-            // Pulsing signal along the line
-            const pulse = Math.sin(time * 0.002 + nodes[i].pulsePhase) * 0.5 + 0.5;
+            const alpha = (1 - dist / connectionDist) * 0.2;
+            const pulse = Math.sin(time * 0.0015 + nodes[i].pulsePhase) * 0.5 + 0.5;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(100, 200, 255, ${alpha * (0.5 + pulse * 0.5)})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(130, 210, 255, ${alpha * (0.4 + pulse * 0.3)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
-
-            // Traveling signal dot
-            if (alpha > 0.15) {
-              const t = (Math.sin(time * 0.003 + nodes[i].pulsePhase + nodes[j].pulsePhase) * 0.5 + 0.5);
-              const sx = nodes[i].x + (nodes[j].x - nodes[i].x) * t;
-              const sy = nodes[i].y + (nodes[j].y - nodes[i].y) * t;
-              ctx.beginPath();
-              ctx.arc(sx, sy, 1.2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(140, 220, 255, ${alpha * 0.8})`;
-              ctx.fill();
-            }
           }
         }
       }
 
       // Draw nodes
       for (const node of nodes) {
-        const pulse = Math.sin(time * 0.003 + node.pulsePhase) * 0.4 + 0.6;
-        // Glow
-        const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 4);
-        grad.addColorStop(0, `rgba(100, 200, 255, ${0.3 * pulse})`);
-        grad.addColorStop(1, "rgba(100, 200, 255, 0)");
+        const pulse = Math.sin(time * 0.002 + node.pulsePhase) * 0.3 + 0.7;
+        // Subtle glow
+        const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 3);
+        grad.addColorStop(0, `rgba(130, 210, 255, ${0.2 * pulse})`);
+        grad.addColorStop(1, "rgba(130, 210, 255, 0)");
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, node.radius * 3, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
 
-        // Core
+        // Core dot
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(150, 220, 255, ${0.6 + pulse * 0.4})`;
+        ctx.fillStyle = `rgba(160, 220, 255, ${0.5 + pulse * 0.3})`;
         ctx.fill();
       }
 
