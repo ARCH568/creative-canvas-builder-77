@@ -70,13 +70,13 @@ const NeuralNetwork = () => {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectionDist) {
-            const alpha = (1 - dist / connectionDist) * 0.2;
+            const alpha = (1 - dist / connectionDist) * 0.45;
             const pulse = Math.sin(time * 0.0015 + nodes[i].pulsePhase) * 0.5 + 0.5;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(130, 210, 255, ${alpha * (0.4 + pulse * 0.3)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(180, 225, 255, ${alpha * (0.5 + pulse * 0.4)})`;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }
