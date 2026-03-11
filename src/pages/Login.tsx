@@ -43,13 +43,15 @@ const Login = () => {
 
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md px-6 animate-fade-in-up">
-        <div className="glass-card rounded-2xl border border-ice/30 p-8 shadow-lg shadow-navy-deep/40">
+        <div className="login-card rounded-2xl border border-ice/25 p-8">
           <div className="flex flex-col items-center mb-8">
-            <img
-              src={hituLogo}
-              alt="HITU(MBI) Logo"
-              className="w-24 h-24 mb-3 animate-float drop-shadow-2xl"
-            />
+            <div className="bg-white/90 rounded-full p-3 mb-3 animate-float drop-shadow-2xl">
+              <img
+                src={hituLogo}
+                alt="HITU(MBI) Logo"
+                className="w-20 h-20"
+              />
+            </div>
             <h1 className="text-4xl font-bold font-display tracking-wider text-foreground">
               HITU(MBI)
             </h1>
