@@ -27,18 +27,27 @@ const NeuralNetwork = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const nodeCount = 45;
-    const connectionDist = 180;
+    const nodeCount = 60;
+    const connectionDist = 150;
 
-    // Initialize nodes
-    nodesRef.current = Array.from({ length: nodeCount }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: 2 + Math.random() * 2.5,
-      pulsePhase: Math.random() * Math.PI * 2,
-    }));
+    // Initialize nodes evenly spread using grid-based distribution
+    const cols = Math.ceil(Math.sqrt(nodeCount * (canvas.width / canvas.height)));
+    const rows = Math.ceil(nodeCount / cols);
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
+
+    nodesRef.current = Array.from({ length: nodeCount }, (_, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      return {
+        x: cellW * (col + 0.2 + Math.random() * 0.6),
+        y: cellH * (row + 0.2 + Math.random() * 0.6),
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        radius: 1.2 + Math.random() * 1,
+        pulsePhase: Math.random() * Math.PI * 2,
+      };
+    });
 
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
