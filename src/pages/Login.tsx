@@ -43,21 +43,22 @@ const Login = () => {
 
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md px-6 animate-fade-in-up">
-        <div className="flex flex-col items-center mb-8">
-          <img
-            src={hituLogo}
-            alt="HITU(MBI) Logo"
-            className="w-28 h-28 mb-4 animate-float drop-shadow-2xl"
-          />
-          <h1 className="text-4xl font-bold font-display tracking-wider text-foreground">
-            HITU(MBI)
-          </h1>
-          <p className="text-ice text-lg mt-1 font-display tracking-wide">
-            Vigilant authority, Mission integrity
-          </p>
-        </div>
+        <div className="glass-card rounded-2xl border border-ice/30 p-8 shadow-lg shadow-navy-deep/40">
+          <div className="flex flex-col items-center mb-8">
+            <img
+              src={hituLogo}
+              alt="HITU(MBI) Logo"
+              className="w-24 h-24 mb-3 animate-float drop-shadow-2xl"
+            />
+            <h1 className="text-4xl font-bold font-display tracking-wider text-foreground">
+              HITU(MBI)
+            </h1>
+            <p className="text-ice text-lg mt-1 font-display tracking-wide">
+              Vigilant authority, Mission integrity
+            </p>
+          </div>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5">
           <div className="glass-input rounded-lg flex items-center px-4 py-3 glow-border focus-within:border-primary/50 transition-colors">
             <User className="w-5 h-5 text-muted-foreground mr-3 flex-shrink-0" />
             <input
