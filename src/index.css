@@ -77,6 +77,11 @@
     backdrop-filter: blur(16px);
     border: 1px solid hsl(216 30% 30% / 0.4);
   }
+  .login-card {
+    background: linear-gradient(145deg, hsl(210 40% 20% / 0.75), hsl(216 50% 14% / 0.85));
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px hsl(216 55% 8% / 0.5), inset 0 1px 0 hsl(200 60% 80% / 0.1);
+  }
   .glass-input {
     background: hsl(216 45% 14% / 0.7);
     backdrop-filter: blur(8px);
