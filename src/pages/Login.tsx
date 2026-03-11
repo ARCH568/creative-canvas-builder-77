@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, User, Lock } from "lucide-react";
 import oceanBg from "@/assets/ocean-bg.jpg";
 import hituLogo from "@/assets/hitu-logo.png";
+import NeuralNetwork from "@/components/NeuralNetwork";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,23 +24,10 @@ const Login = () => {
         alt=""
         className="absolute inset-0 w-full h-full object-cover animate-bg-float"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-dark/50 to-navy-deep/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/80 via-navy-dark/70 to-navy-deep/80" />
 
-      {/* Animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-ice/30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Neural Network Effect */}
+      <NeuralNetwork />
 
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md px-6 animate-fade-in-up">
